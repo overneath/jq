@@ -2,8 +2,6 @@ ARG ALPINE=alpine:3.8
 
 FROM ${ALPINE} AS build
 
-ARG JQ_TAG=jq-1.6
-
 RUN apk add --no-cache \
     autoconf \
     automake \
@@ -16,6 +14,8 @@ RUN apk add --no-cache \
     valgrind
 
 WORKDIR /usr/local/src
+
+ARG JQ_TAG=jq-1.6
 
 RUN git clone --branch ${JQ_TAG} --quiet --recurse-submodules https://github.com/stedolan/jq
 RUN git config --global submodule.modules/oniguruma.ignore dirty
